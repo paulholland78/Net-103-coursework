@@ -1,0 +1,121 @@
+Clear
+IA,		input
+		store A
+Load 		A
+ifA,		skipcond	400		/checks for 0
+		Add		One	
+		Load		A
+		Add		One
+		skipcond	800		/Checks for positive value
+		Jump		IA		/Jumps backs to input for A 
+		SUBT		Two
+		SUBT		Hundred		/Subtracts 100 from the input 
+		skipcond	000		/Checks Negative Value	
+		Jump		IA		/Jumps back to input for A
+
+IB,		input
+		store B
+		Load		B
+ifB,		skipcond	400		/Same as above but for B Variable
+		Add		One
+		Load		B		
+		Add		One
+		skipcond	800		
+		Jump		IB
+		Subt		Two	
+		Subt		Hundred		
+		skipcond	000
+		Jump		IB
+
+IC,		input
+		store C
+		Load		C
+ifC,		skipcond	400		/Same as above but for C Variable
+		Add		One
+		Load		C
+		Add		One
+		skipcond	800		
+		Jump		IC
+		Subt		Two	
+		Subt		Hundred		
+		skipcond	000
+		Jump		IC
+
+ID,		input
+		store D	
+		Load		D
+ifD,		skipcond	400		/Same as above but for D Variable
+		Add		One
+		Load		D
+		Add		One		
+		skipcond	800		
+		Jump		ID
+		Subt		Two	
+		Subt		Hundred		
+		skipcond	000
+		Jump		ID
+
+		JNS		SubAdd		/Jumps to the first subroutine responsible for calculating the value of D
+		Load		Sum		/Loads the Sum
+		Add		A		/Adds A
+		Add		B		/Adds B
+		Add		C		/Adds C
+		Add		D		/Adds D (After it has been tripled)
+		Store		Sum		/Store the new value for the Sum
+		Output		Sum		/Outputs the value of Sum 
+
+SkipCond,	Load		Sum		/Load Sum
+		Skipcond	800		/Skips command if Sum >1
+		Jump		End		/Jumps to the Finish of the Program
+		JNS		SubDiv		/Starts the second subroutine 
+		Jump		SkipCond	/Returns to the begining of this
+		
+End,		Load		Count		/Load the final value
+		Output		Count		/Outputs the final value which will be the average grade
+		Halt				/Ends
+		
+A,		DEC 		0		/Value of A
+B,		DEC		0		/Value of B	
+C,		DEC		0		/Value of C
+D,		DEC		0		/Value of D (worth 3* more than A,B or C)
+Sum,		DEC		0		/Sum set at 0
+Six,		DEC		6		/Six is the Divisible for average Calculation
+Count,		DEC		0		/The Average
+One,		DEC		1
+Two,		DEC		2
+Hundred,	DEC		100
+	
+SubAdd,		HEX 		0		
+		Load 		D		/Loads the value of D
+		Add		D		/Adds the D to itself
+		Add		D		/Adds the D to itself again
+		Store 		D		/Store the new value of D
+		JumpI		SubAdd		/returns the the subroutine with the changed data
+
+SubDiv,		HEX		0
+		
+		Load		Count		/Loads Counter
+		Add		One		/Add One to keep Counter ticking
+		Store 		Count		/Store Counter
+		LOAD		Sum		/Load The Sum
+		Subt		Six		/Subtract The Divisble
+		Store		Sum		/Store New Sum
+		Skipcond	000		/If Negative go to end
+		JumpI		SubDiv		/If Postive or Zero Repeat
+		Jump		End		/Subroutine over
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

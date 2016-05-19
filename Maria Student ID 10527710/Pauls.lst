@@ -1,0 +1,158 @@
+     Assembly listing for: Pauls.mas
+                Assembled: Thu May 19 20:58:11 BST 2016
+
+000 A000 |           CLEAR               
+001 5000 |  IA       INPUT               
+002 2045 |           STORE A             
+003 1045 |           LOAD A              
+004 8400 |  ifA      SKIPCOND 400       /checks for 0
+005 304C |           ADD One             
+006 1045 |           LOAD A              
+007 304C |           ADD One             
+008 8800 |           SKIPCOND 800       /Checks for positive value
+009 9001 |           JUMP IA            /Jumps backs to input for A 
+00A 404D |           SUBT Two            
+00B 404E |           SUBT Hundred       /Subtracts 100 from the input 
+00C 8000 |           SKIPCOND 000       /Checks Negative Value	
+00D 9001 |           JUMP IA            /Jumps back to input for A
+         |                              
+00E 5000 |  IB       INPUT               
+00F 2046 |           STORE B             
+010 1046 |           LOAD B              
+011 8400 |  ifB      SKIPCOND 400       /Same as above but for B Variable
+012 304C |           ADD One             
+013 1046 |           LOAD B              
+014 304C |           ADD One             
+015 8800 |           SKIPCOND 800        
+016 900E |           JUMP IB             
+017 404D |           SUBT Two            
+018 404E |           SUBT Hundred        
+019 8000 |           SKIPCOND 000        
+01A 900E |           JUMP IB             
+         |                              
+01B 5000 |  IC       INPUT               
+01C 2047 |           STORE C             
+01D 1047 |           LOAD C              
+01E 8400 |  ifC      SKIPCOND 400       /Same as above but for C Variable
+01F 304C |           ADD One             
+020 1047 |           LOAD C              
+021 304C |           ADD One             
+022 8800 |           SKIPCOND 800        
+023 901B |           JUMP IC             
+024 404D |           SUBT Two            
+025 404E |           SUBT Hundred        
+026 8000 |           SKIPCOND 000        
+027 901B |           JUMP IC             
+         |                              
+028 5000 |  ID       INPUT               
+029 2048 |           STORE D             
+02A 1048 |           LOAD D              
+02B 8400 |  ifD      SKIPCOND 400       /Same as above but for D Variable
+02C 304C |           ADD One             
+02D 1048 |           LOAD D              
+02E 304C |           ADD One             
+02F 8800 |           SKIPCOND 800        
+030 9028 |           JUMP ID             
+031 404D |           SUBT Two            
+032 404E |           SUBT Hundred        
+033 8000 |           SKIPCOND 000        
+034 9028 |           JUMP ID             
+         |                              
+035 004F |           JNS SubAdd         /Jumps to the first subroutine responsible for calculating the value of D
+036 1049 |           LOAD Sum           /Loads the Sum
+037 3045 |           ADD A              /Adds A
+038 3046 |           ADD B              /Adds B
+039 3047 |           ADD C              /Adds C
+03A 3048 |           ADD D              /Adds D (After it has been tripled)
+03B 2049 |           STORE Sum          /Store the new value for the Sum
+03C 6000 |           OUTPUT             /Outputs the value of Sum 
+         |                              
+03D 1049 |  SkipCond LOAD Sum           /Load Sum
+03E 8800 |           SKIPCOND 800       /Skips command if Sum >1
+03F 9042 |           JUMP End           /Jumps to the Finish of the Program
+040 0055 |           JNS SubDiv         /Starts the second subroutine 
+041 903D |           JUMP SkipCond      /Returns to the begining of this
+         |                              		
+042 104B |  End      LOAD Count         /Load the final value
+043 6000 |           OUTPUT             /Outputs the final value which will be the average grade
+044 7000 |           HALT               /Ends
+         |                              		
+045 0000 |  A        DEC 0              /Value of A
+046 0000 |  B        DEC 0              /Value of B	
+047 0000 |  C        DEC 0              /Value of C
+048 0000 |  D        DEC 0              /Value of D (worth 3* more than A,B or C)
+049 0000 |  Sum      DEC 0              /Sum set at 0
+04A 0006 |  Six      DEC 6              /Six is the Divisible for average Calculation
+04B 0000 |  Count    DEC 0              /The Average
+04C 0001 |  One      DEC 1               
+04D 0002 |  Two      DEC 2               
+04E 0064 |  Hundred  DEC 100             
+         |                              	
+04F 0000 |  SubAdd   HEX 0               
+050 1048 |           LOAD D             /Loads the value of D
+051 3048 |           ADD D              /Adds the D to itself
+052 3048 |           ADD D              /Adds the D to itself again
+053 2048 |           STORE D            /Store the new value of D
+054 C04F |           JUMPI SubAdd       /returns the the subroutine with the changed data
+         |                              
+055 0000 |  SubDiv   HEX 0               
+         |                              		
+056 104B |           LOAD Count         /Loads Counter
+057 304C |           ADD One            /Add One to keep Counter ticking
+058 204B |           STORE Count        /Store Counter
+059 1049 |           LOAD Sum           /Load The Sum
+05A 404A |           SUBT Six           /Subtract The Divisble
+05B 2049 |           STORE Sum          /Store New Sum
+05C 8000 |           SKIPCOND 000       /If Negative go to end
+05D C055 |           JUMPI SubDiv       /If Postive or Zero Repeat
+05E 9042 |           JUMP End           /Subroutine over
+         |                              
+         |                              
+         |                              
+         |                              
+         |                              
+         |                              
+         |                              
+         |                              
+         |                              
+         |                              
+         |                              
+         |                              
+         |                              
+         |                              
+         |                              
+         |                              
+
+Assembly successful.
+
+         SYMBOL TABLE
+         ----------------------------------------------------
+          Symbol   | Defined | References 
+         ----------+---------+-------------------------------
+          A        |   045   | 002, 003, 006, 037
+          B        |   046   | 00F, 010, 013, 038
+          C        |   047   | 01C, 01D, 020, 039
+          Count    |   04B   | 042, 056, 058
+          D        |   048   | 029, 02A, 02D, 03A, 050, 051, 
+                   |         | 052, 053
+          End      |   042   | 03F, 05E
+          Hundred  |   04E   | 00B, 018, 025, 032
+          IA       |   001   | 009, 00D
+          IB       |   00E   | 016, 01A
+          IC       |   01B   | 023, 027
+          ID       |   028   | 030, 034
+          One      |   04C   | 005, 007, 012, 014, 01F, 021, 
+                   |         | 02C, 02E, 057
+          Six      |   04A   | 05A
+          SkipCond |   03D   | 041
+          SubAdd   |   04F   | 035, 054
+          SubDiv   |   055   | 040, 05D
+          Sum      |   049   | 036, 03B, 03D, 059, 05B
+          Two      |   04D   | 00A, 017, 024, 031
+          ifA      |   004   | 
+          ifB      |   011   | 
+          ifC      |   01E   | 
+          ifD      |   02B   | 
+         ----------------------------------------------------
+
+

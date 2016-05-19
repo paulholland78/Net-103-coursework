@@ -1,0 +1,26 @@
+ -------------------
+ Symbol   | Location
+ ---------+---------
+ A        |   045
+ B        |   046
+ C        |   047
+ Count    |   04B
+ D        |   048
+ End      |   042
+ Hundred  |   04E
+ IA       |   001
+ IB       |   00E
+ IC       |   01B
+ ID       |   028
+ One      |   04C
+ Six      |   04A
+ SkipCond |   03D
+ SubAdd   |   04F
+ SubDiv   |   055
+ Sum      |   049
+ Two      |   04D
+ ifA      |   004
+ ifB      |   011
+ ifC      |   01E
+ ifD      |   02B
+
