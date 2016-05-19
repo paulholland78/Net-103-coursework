@@ -14,24 +14,24 @@ Load 		A
 if1,		skipcond	800		/Checks to see if the value is positive
 		Jump		Endif		/Jumps straight to the end (used for if you input a negative number)
 		Subt		hundred		/Subtracts 100 from the input ( if you input more than 100 your input -100 will still be a positive)
-		skipcond	000		/Checks to see if your number is negative (after having 100 taken away from it (it should be))	
-		Jump		Endif		/Jumps to the end (if the number was still positive after -100) 
+		skipcond	000		/Checks to see if your number is negative (after having 100 taken away from it (it should be))
+		Jump		Endif		/Jumps to the end (if the number was still positive after -100)
 		Load		B
 if2,		skipcond	800		/Same calculations as above
-		Jump		Endif		
-		Subt		hundred		
+		Jump		Endif
+		Subt		hundred
 		skipcond	000
 		Jump		Endif
 		Load		C
 if3,		skipcond	800		/Same calculations as above
-		Jump		Endif		
-		Subt		hundred		
+		Jump		Endif
+		Subt		hundred
 		skipcond	000
 		Jump		Endif
 		Load		D
 if4,		skipcond	800		/Same calculations as above
-		Jump		Endif		
-		Subt		hundred		
+		Jump		Endif
+		Subt		hundred
 		skipcond	000
 		Jump		Endif
 
@@ -49,13 +49,13 @@ SkipCond,	Load		Sum		/Load Sum
 		Jump		Endif		/Jumps to the end
 		JNS		SubR2		/Starts the second subroutine responsible for calculating the average
 		Jump		SkipCond	/Returns to the begining of this
-		
+
 Endif,		Load		Count		/Load the final value
 		Output		Count		/Outputs the final value which will be the average grade
 		Halt				/Ends
-		
+
 A,		DEC 		0		/Value of the First Number
-B,		DEC		0		/Value of the Second Number	
+B,		DEC		0		/Value of the Second Number
 C,		DEC		0		/Value of the Third Number
 D,		DEC		0		/Value of the Fourth Number (worth 3* more)
 Sum,		DEC		0		/Sum set at 0 to be calculated
@@ -63,8 +63,8 @@ Six,		DEC		6		/Six used to calculate the average
 Count,		DEC		0
 One,		DEC		1
 hundred,	DEC		100
-	
-SubR1,		HEX 		0		
+
+SubR1,		HEX 		0
 		Load 		D		/Loads the value of D
 		Add		D		/Adds the D to itself
 		Add		D		/Adds the D to itself again
@@ -72,7 +72,7 @@ SubR1,		HEX 		0
 		JumpI		SubR1		/returns the the subroutine with the changed data
 
 SubR2,		HEX		0
-		
+
 		Load		Count
 		Add		One
 		Store 		Count
@@ -82,19 +82,3 @@ SubR2,		HEX		0
 		Skipcond	000
 		JumpI		SubR2
 		JumpI		Endif
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
